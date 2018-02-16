@@ -86,7 +86,7 @@ public class Person implements ReadOnlyPerson {
     }
 
     /**
-     * Defines comparator used in sorting names in alphabetical order.
+     * Defines comparator used in sorting names by alphabetical order.
      */
     public static Comparator<Person> PersonComparator = new Comparator<Person>() {
         public int compare(Person person1, Person person2) {

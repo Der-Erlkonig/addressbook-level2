@@ -119,7 +119,7 @@ public class AddressBook {
     }
 
     /**
-     * Sorts all persons in the address book in alphabetical order of names.
+     * Sorts all persons in the address book by alphabetical order of names.
      */
     public void sortAddressBook() {
         allPersons.sort();
