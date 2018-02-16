@@ -85,12 +85,7 @@ public class Main {
             CommandResult result = executeCommand(command);
             recordResult(result);
             ui.showResultToUser(result);
-            if (commandIsAddOrDelete(userCommandText)) {
-                command = new Parser().parseCommand("list");
-                result = executeCommand(command);
-                recordResult(result);
-                ui.showResultToUser(result);
-            }
+            showListAfterAddOrDelete(userCommandText);
         } while (!ExitCommand.isExit(command));
     }
 
@@ -117,6 +112,19 @@ public class Main {
         } catch (Exception e) {
             ui.showToUser(e.getMessage());
             throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * Show the list of contacts in addressbook after add or delete command
+     * @param userCommandText
+     */
+
+    private void showListAfterAddOrDelete(String userCommandText) {
+        if (commandIsAddOrDelete(userCommandText)) {
+            CommandResult result = executeCommand(new ListCommand());
+            recordResult(result);
+            ui.showResultToUser(result);
         }
     }
 
