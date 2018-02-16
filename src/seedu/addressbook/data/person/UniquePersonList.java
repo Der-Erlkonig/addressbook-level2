@@ -129,6 +129,9 @@ public class UniquePersonList implements Iterable<Person> {
         internalList.clear();
     }
 
+    /**
+     * Sorts all persons in the address book in alphabetical order of names.
+     */
     public void sort() {
         Collections.sort(internalList, Person.PersonComparator);
     }

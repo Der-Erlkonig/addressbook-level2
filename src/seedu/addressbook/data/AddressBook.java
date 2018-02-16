@@ -118,6 +118,9 @@ public class AddressBook {
         return new UniqueTagList(allTags);
     }
 
+    /**
+     * Sorts all persons in the address book in alphabetical order of names.
+     */
     public void sortAddressBook() {
         allPersons.sort();
     }
