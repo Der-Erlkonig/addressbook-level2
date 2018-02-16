@@ -4,9 +4,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-import seedu.addressbook.commands.Command;
-import seedu.addressbook.commands.CommandResult;
-import seedu.addressbook.commands.ExitCommand;
+import seedu.addressbook.commands.*;
 import seedu.addressbook.data.AddressBook;
 import seedu.addressbook.data.person.ReadOnlyPerson;
 import seedu.addressbook.parser.Parser;
@@ -87,7 +85,7 @@ public class Main {
             CommandResult result = executeCommand(command);
             recordResult(result);
             ui.showResultToUser(result);
-
+            showListAfterAddOrDelete(userCommandText);
         } while (!ExitCommand.isExit(command));
     }
 
@@ -115,6 +113,30 @@ public class Main {
             ui.showToUser(e.getMessage());
             throw new RuntimeException(e);
         }
+    }
+
+    /**
+     * Show the list of contacts in addressbook after add or delete command
+     * @param userCommandText
+     */
+
+    private void showListAfterAddOrDelete(String userCommandText) {
+        if (commandIsAddOrDelete(userCommandText)) {
+            CommandResult result = executeCommand(new ListCommand());
+            recordResult(result);
+            ui.showResultToUser(result);
+        }
+    }
+
+    /**
+     * Checks if user command is add or delete
+     * @param userCommandText
+     * @return true if so, false otherwise
+     */
+    private boolean commandIsAddOrDelete(String userCommandText) {
+        String[] result = userCommandText.split(" ", 2);
+        String commandText = result[0];
+        return commandText.equals("add") || commandText.equals("delete");
     }
 
     /**
