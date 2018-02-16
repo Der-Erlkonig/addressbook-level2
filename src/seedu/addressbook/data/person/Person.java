@@ -3,6 +3,7 @@ package seedu.addressbook.data.person;
 import seedu.addressbook.data.tag.UniqueTagList;
 
 import java.util.Objects;
+import java.util.Comparator;
 
 /**
  * Represents a Person in the address book.
@@ -84,4 +85,14 @@ public class Person implements ReadOnlyPerson {
         return getAsTextShowAll();
     }
 
+    /**
+     * Defines comparator used in sorting names by alphabetical order.
+     */
+    public static Comparator<Person> PersonComparator = new Comparator<Person>() {
+        public int compare(Person person1, Person person2) {
+            String PersonName1 = person1.getName().toString().toUpperCase();
+            String PersonName2 = person2.getName().toString().toUpperCase();
+            return PersonName1.compareTo(PersonName2);
+        }
+    };
 }
