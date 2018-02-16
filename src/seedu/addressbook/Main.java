@@ -4,9 +4,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-import seedu.addressbook.commands.Command;
-import seedu.addressbook.commands.CommandResult;
-import seedu.addressbook.commands.ExitCommand;
+import seedu.addressbook.commands.*;
 import seedu.addressbook.data.AddressBook;
 import seedu.addressbook.data.person.ReadOnlyPerson;
 import seedu.addressbook.parser.Parser;
@@ -87,7 +85,12 @@ public class Main {
             CommandResult result = executeCommand(command);
             recordResult(result);
             ui.showResultToUser(result);
-
+            if (commandIsAddOrDelete(userCommandText)) {
+                command = new Parser().parseCommand("list");
+                result = executeCommand(command);
+                recordResult(result);
+                ui.showResultToUser(result);
+            }
         } while (!ExitCommand.isExit(command));
     }
 
@@ -115,6 +118,17 @@ public class Main {
             ui.showToUser(e.getMessage());
             throw new RuntimeException(e);
         }
+    }
+
+    /**
+     * Checks if user command is add or delete
+     * @param userCommandText
+     * @return true if so, false otherwise
+     */
+    private boolean commandIsAddOrDelete(String userCommandText) {
+        String[] result = userCommandText.split(" ", 2);
+        String commandText = result[0];
+        return commandText.equals("add") || commandText.equals("delete");
     }
 
     /**
