@@ -16,7 +16,7 @@ public class SortCommand extends Command {
     public static final String MESSAGE_SORT_SUCCESS = "Address book has been sorted!";
 
     public CommandResult execute() {
-        List<ReadOnlyPerson> allPersons = addressBook.getAllPersons().immutableListView();
+        addressBook.sortAddressBook();
         return new CommandResult(MESSAGE_SORT_SUCCESS);
     }
 }
